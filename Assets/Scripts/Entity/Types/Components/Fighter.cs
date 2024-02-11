@@ -134,7 +134,7 @@ public class Fighter : MonoBehaviour
             }
             GetComponent<Actor>().IsAlive = false;
         }
-        // 걸려있는 모든 효과 제가
+        // 걸려있는 모든 효과 제거
         effects.Clear();
         // 시체 스프라이트로 변경
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();

@@ -52,7 +52,7 @@ sealed class Procgen : MonoBehaviour
     private List<Tuple<int, string, int>> monsterChances = new List<Tuple<int, string, int>>
     {
         // 1 ~ 5층 적
-        new Tuple<int, string, int>(1, "쥐", 60),
+        new Tuple<int, string, int>(1, "쥐", 60), new Tuple<int, string, int>(3, "개미", 20),
         new Tuple<int, string, int>(3, "박쥐", 20), new Tuple<int, string, int>(3, "도마뱀", 15),
         new Tuple<int, string, int>(5, "박쥐", 40), new Tuple<int, string, int>(5, "도마뱀", 30),
         // 6 ~ 10층 적
@@ -62,13 +62,19 @@ sealed class Procgen : MonoBehaviour
         new Tuple<int, string, int>(7, "박쥐", 10), new Tuple<int, string, int>(7, "도마뱀", 10),
         new Tuple<int, string, int>(7, "고블린", 60), new Tuple<int, string, int>(7, "슬라임", 15),
         new Tuple<int, string, int>(8, "독사", 10), new Tuple<int, string, int>(8, "스켈레톤 전사", 10),
+        new Tuple<int, string, int>(8, "벌", 10), 
         new Tuple<int, string, int>(9, "박쥐", 0), new Tuple<int, string, int>(9, "도마뱀", 0),
-        // 11 ~ 18층 적
+        new Tuple<int, string, int>(9, "개미", 0),
+        new Tuple<int, string, int>(10, "홉고블린", 25),
+        // 11 ~ 17층 적
         new Tuple<int, string, int>(11, "고블린", 40), new Tuple<int, string, int>(11, "오우거", 10),
         new Tuple<int, string, int>(12, "고블린", 20), new Tuple<int, string, int>(12, "오우거", 30),
+        new Tuple<int, string, int>(12, "화염 박쥐", 30),
         new Tuple<int, string, int>(13, "오우거 전사", 10), new Tuple<int, string, int>(13, "오우거", 60),
         new Tuple<int, string, int>(14, "슬라임", 0), new Tuple<int, string, int>(14, "오우거 마법사", 10),
-
+        new Tuple<int, string, int>(15, "화염 슬라임", 10),
+        // 18 ~ 21층 적
+        new Tuple<int, string, int>(18, "돌 골렘", 10), new Tuple<int, string, int>(18, "크리스탈 골렘", 10),
     };
 
     public int GetMaxValueForFloor(List<Tuple<int, int>> values, int floor)

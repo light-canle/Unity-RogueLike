@@ -38,7 +38,7 @@ public class Level : MonoBehaviour
         xpToNextLevel = ExperienceToNextLevel();
     }
 
-    public void IncreaseMaxHp(int amount = 20)
+    public void IncreaseMaxHp(int amount = 15)
     {
         GetComponent<Fighter>().MaxHp += amount;
         GetComponent<Fighter>().Hp += amount;

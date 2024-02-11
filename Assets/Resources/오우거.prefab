@@ -30,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8560937076482697572}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1579776068729214236
 SpriteRenderer:
@@ -176,7 +176,7 @@ MonoBehaviour:
   xpToNextLevel: 350
   levelUpBase: 200
   levelUpFactor: 150
-  xpGiven: 160
+  xpGiven: 175
 --- !u!114 &2057906448938490147
 MonoBehaviour:
   m_ObjectHideFlags: 0

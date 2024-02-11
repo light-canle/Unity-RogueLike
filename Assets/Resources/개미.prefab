@@ -10,14 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4958069122482199336}
   - component: {fileID: 1579776068729214236}
-  - component: {fileID: 4407240300610660194}
-  - component: {fileID: -3073879911625751107}
-  - component: {fileID: -8707153400226282861}
-  - component: {fileID: -1118494509160334259}
-  - component: {fileID: -5691922664046547918}
-  - component: {fileID: 2057906448938490147}
+  - component: {fileID: 7906542488978855569}
+  - component: {fileID: 3176872175729029641}
+  - component: {fileID: 1356092629603432435}
+  - component: {fileID: 5597794215339875309}
+  - component: {fileID: 7811809972421004326}
+  - component: {fileID: 4813049501901143542}
   m_Layer: 0
-  m_Name: "\uBC15\uC950"
+  m_Name: "\uAC1C\uBBF8"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 2102232827
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ce18b808bba8f914d9600e88f0388bca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 446494de9c37bd64da91fa6cfa72af01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4407240300610660194
+--- !u!114 &7906542488978855569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,14 +104,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocksMovement: 1
   isAlive: 1
-  fieldOfViewRange: 8
+  fieldOfViewRange: 7
   fieldOfView: []
-  ai: {fileID: -1118494509160334259}
+  ai: {fileID: 5597794215339875309}
   inventory: {fileID: 0}
-  equipment: {fileID: 2057906448938490147}
-  fighter: {fileID: -3073879911625751107}
-  level: {fileID: -5691922664046547918}
---- !u!114 &-3073879911625751107
+  equipment: {fileID: 4813049501901143542}
+  fighter: {fileID: 3176872175729029641}
+  level: {fileID: 7811809972421004326}
+--- !u!114 &3176872175729029641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,16 +123,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776a0d23f11e3a14aaa9038b87559bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 12
-  hp: 12
+  maxHp: 9
+  hp: 9
   baseDefense: 0
   basePower: 2
-  baseAccuracy: -4
-  baseEvasion: 2
+  baseAccuracy: 0
+  baseEvasion: 3
   target: {fileID: 0}
   defenseModifier: 0
   attackModifier: 0
---- !u!114 &-8707153400226282861
+--- !u!114 &1356092629603432435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e653dd042a26c49abde3d889dbe0fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1118494509160334259
+--- !u!114 &5597794215339875309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,10 +156,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fab0a194d269af4ab4f5870997301b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aStar: {fileID: -8707153400226282861}
-  fighter: {fileID: -3073879911625751107}
+  aStar: {fileID: 1356092629603432435}
+  fighter: {fileID: 3176872175729029641}
   isFighting: 0
---- !u!114 &-5691922664046547918
+--- !u!114 &7811809972421004326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,7 +177,7 @@ MonoBehaviour:
   levelUpBase: 200
   levelUpFactor: 150
   xpGiven: 45
---- !u!114 &2057906448938490147
+--- !u!114 &4813049501901143542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

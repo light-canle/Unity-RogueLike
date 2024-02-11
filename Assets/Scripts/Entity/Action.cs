@@ -218,6 +218,10 @@ public static class Action
         {
             target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Poison, Random.Range(3,7));
         }
+        else if (actor.name == "벌" && Random.Range(0.0f, 1.0f) > 0.75f)
+        {
+            target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Poison, Random.Range(2,6));
+        }
         else if (actor.name == "오우거 마법사" && Random.Range(0.0f, 1.0f) > 0.75f)
         {
             if (Random.Range(0.0f, 1.0f) > 0.6f)
@@ -232,6 +236,14 @@ public static class Action
         else if (actor.name == "스켈레톤 전사" && Random.Range(0.0f, 1.0f) > 0.8f)
         {
             target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Vulnerability, 20);
+        }
+        else if (actor.name == "화염 슬라임" && Random.Range(0.0f, 1.0f) > 0.7f)
+        {
+            target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Burn, Random.Range(3, 6));
+        }
+        else if (actor.name == "화염 박쥐" && Random.Range(0.0f, 1.0f) > 0.7f)
+        {
+            target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Burn, Random.Range(3, 6));
         }
         GameManager.instance.EndTurn();
     }

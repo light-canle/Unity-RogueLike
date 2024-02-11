@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -5691922664046547918}
   - component: {fileID: 2057906448938490147}
   m_Layer: 0
-  m_Name: "\uBC15\uC950"
+  m_Name: "\uBC8C"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 2102232827
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ce18b808bba8f914d9600e88f0388bca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb736f8f3dbf6af48883fa02e27c68cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocksMovement: 1
   isAlive: 1
-  fieldOfViewRange: 8
+  fieldOfViewRange: 7
   fieldOfView: []
   ai: {fileID: -1118494509160334259}
   inventory: {fileID: 0}
@@ -123,12 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776a0d23f11e3a14aaa9038b87559bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 12
-  hp: 12
-  baseDefense: 0
-  basePower: 2
-  baseAccuracy: -4
-  baseEvasion: 2
+  maxHp: 11
+  hp: 11
+  baseDefense: 2
+  basePower: 4
+  baseAccuracy: 2
+  baseEvasion: 4
   target: {fileID: 0}
   defenseModifier: 0
   attackModifier: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   xpToNextLevel: 350
   levelUpBase: 200
   levelUpFactor: 150
-  xpGiven: 45
+  xpGiven: 130
 --- !u!114 &2057906448938490147
 MonoBehaviour:
   m_ObjectHideFlags: 0

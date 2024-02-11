@@ -221,7 +221,7 @@ public class UIManager : MonoBehaviour
         GameObject strengthButton = levelUpMenuContent.transform.GetChild(1).gameObject;
         GameObject agilityButton = levelUpMenuContent.transform.GetChild(2).gameObject;
 
-        constitutionButton.GetComponent<TextMeshProUGUI>().text = $"a) 건강 (+20 체력 | 현재:{actor.GetComponent<Fighter>().MaxHp})";
+        constitutionButton.GetComponent<TextMeshProUGUI>().text = $"a) 건강 (+15 체력 | 현재:{actor.GetComponent<Fighter>().MaxHp})";
         strengthButton.GetComponent<TextMeshProUGUI>().text = $"b) 힘 (+ 1 힘 | 현재:{actor.GetComponent<Fighter>().Power()} )";
         agilityButton.GetComponent<TextMeshProUGUI>().text = $"c) 보호막 (+ 1 방어 | 현재:{actor.GetComponent<Fighter>().Defense()})";
 
