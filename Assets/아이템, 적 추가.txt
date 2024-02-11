@@ -1,0 +1,13 @@
+이 게임에 새로운 것을 추가하는 방법
+1. 아이템
+(1) Consumable을 상속받는 새로운 스크립트 생성 (선택 - 기존 것을 다시 써도 됨)
+
+(2) Procgen.cs에서 itemChances에 해당 아이템이 나오는 위치, 가중치 쓰기
+(4) 해당 아이템의 프리팹 생성
+- Consumable을 상속하는 스크립트와 Item 스크립트를 넣는다.
+- Item 스크립트의 Consumable 변수에 같이 넣은 스크립트를 집어넣는다.
+
+2. 적
+(1) MapManager.cs의 CreateEntity에서 switch문에 적의 이름에 대응하는 case문 제작
+(2) Procgen.cs에서 PlaceEntities함수의 적을 생성하는 부분에서 새로 만든 적을 생성하도록 함
+(3) 해당 적의 프리팹 생성 후 Figther 스크립트의 스탯 조정
