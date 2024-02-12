@@ -249,6 +249,74 @@ public static class Action
         GameManager.instance.EndTurn();
     }
 
+    /// <summary>
+    /// target에 해당하는 엔티티에게 원거리 공격을 가한다.
+    /// </summary>
+    /// <param name="actor">공격을 하는 액터</param>
+    /// <param name="target">공격 대상</param>
+    public static void RangeAction(Actor actor, Actor target, int thrownDamage)
+    {
+        bool isHit = false; // 맞았는지 여부
+        int damage = 0; // 최종 대미지
+        // 대미지 설정 - 전투 시스템의 개선을 하려면 여기 부분을 수정한다.
+        // damage 변수에 최종 대미지를 계산해서 넣으면 된다.
+
+        // 1. 공격의 명중 여부 설정
+        float ACC = (float)actor.GetComponent<Fighter>().Accuracy();
+        float EV = (float)target.GetComponent<Fighter>().Evasion();
+        float acc_rate = Mathf.Min((((65 + ACC * 4.21f) * (110 - EV * 2.40f)) / (100 + 1.015f * EV)), 100.0f);
+
+        if (Random.Range(0.0f, 100.0f) < acc_rate)
+        {
+            isHit = true;
+        }
+
+        if (isHit)
+        {
+            // 2. 공격 측 피해량 계산
+            int attacker_value = thrownDamage;
+            attacker_value =
+                Mathf.FloorToInt((float)attacker_value * (1 + actor.GetComponent<Fighter>().AttackModifier));
+
+            // 3. 방어 측 방어량 계산
+            int defender_value = Random.Range(1 + target.GetComponent<Fighter>().Defense() / 4, // 최소
+                target.GetComponent<Fighter>().Defense() * 2 + 1); // 최대
+
+            // 4. 최종 대미지 계산
+            damage = attacker_value - defender_value;
+            damage = Mathf.FloorToInt((float)damage * (1 - actor.GetComponent<Fighter>().DefenseModifier));
+        }
+
+        // =========================================================================================
+        string attackDesc = $"{actor.name}(이)가 무기를 던져서 {target.name}(을)를 공격";
+
+        string colorHex = "";
+        // 메시지의 색 설정
+        if (actor.GetComponent<Player>())
+        {
+            colorHex = "#ffffff"; // 흰색
+        }
+        else
+        {
+            colorHex = "#d1a3a4"; // 밝은 빨강
+        }
+
+        if (!isHit)
+        {
+            UIManager.instance.AddMessage($"{attackDesc}했으나 빗나갔다.", colorHex);
+        }
+        else if (damage > 0)
+        {
+            UIManager.instance.AddMessage($"{attackDesc}했고 {damage}의 피해를 입혔다!", colorHex);
+            // 대미지만큼 Hp 감소
+            target.GetComponent<Fighter>().Hp -= damage;
+        }
+        else
+        {
+            UIManager.instance.AddMessage($"{attackDesc}했으나 피해를 입히지는 못했다.", colorHex);
+        }
+    }
+
     public static void MovementAction(Actor actor, Vector2 direction)
     {
         // Debug.Log($"{entity.name} moves {direction}!"};

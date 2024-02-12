@@ -26,6 +26,15 @@ public class Level : MonoBehaviour
 
         if (RequiresLevelUp())
         {
+            // 오르는 레벨이 짝수이면 정확도를, 홀수면 회피를 1 올린다.
+            if ((currentLevel + 1 % 2) == 0)
+            {
+                IncreaseAccuracy();
+            }
+            else
+            {
+                IncreaseEvasion();
+            }
             UIManager.instance.ToggleLevelUpMenu(GetComponent<Actor>());
             UIManager.instance.AddMessage($"당신의 레벨이 {currentLevel + 1}(으)로 올랐다!", "#00FF00"); // 초록색
         }
@@ -67,8 +76,7 @@ public class Level : MonoBehaviour
     {
         GetComponent<Fighter>().BaseEvasion += amount;
 
-        UIManager.instance.AddMessage($"당신의 움직임이 더 빨라졌다!", "#00ff00");
-        IncreaseLevel();
+        UIManager.instance.AddMessage($"당신은 공격을 더 잘 피하게 되었다!", "#00ff00");
     }
 
     public void IncreaseAccuracy(int amount = 1)
@@ -76,7 +84,6 @@ public class Level : MonoBehaviour
         GetComponent<Fighter>().BaseAccuracy += amount;
 
         UIManager.instance.AddMessage($"당신의 공격은 더 정확해졌다!", "#00ff00");
-        IncreaseLevel();
     }
 
     public LevelState SaveState() => new LevelState(

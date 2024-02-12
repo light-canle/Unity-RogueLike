@@ -28,6 +28,7 @@ public class FrozenEnemy : AI
         else
         {
             // 빙결 상태에 빠진 액터는 아무것도 할 수 없다.
+            Action.WaitAction();
             turnsRemaining--;
         }
     }

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4912435616478179130}
   - component: {fileID: 873188765188123383}
   - component: {fileID: 2142792769122764633}
-  - component: {fileID: 2084703338879034165}
+  - component: {fileID: -1485600018134014270}
   m_Layer: 0
-  m_Name: "\uD63C\uB780\uC758 \uC8FC\uBB38\uC11C"
+  m_Name: "\uD22C\uCC99\uC6A9 \uB3C5 \uD3EC\uC158"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 2102232827
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7d33c4329e6b2de4aa28118a00480567, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 85feb65a3c80ec149b4bab82026f0be1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocksMovement: 0
-  consumable: {fileID: 2084703338879034165}
+  consumable: {fileID: -1485600018134014270}
   equippable: {fileID: 0}
---- !u!114 &2084703338879034165
+--- !u!114 &-1485600018134014270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +110,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6423676944983916031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d439484076e5a224184fef4896c3312e, type: 3}
+  m_Script: {fileID: 11500000, guid: e78dd949fd6f89742bbcd310c588fa50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfTurns: 20
+  effectType: 0
+  effectTurns: 7
+  maximumRange: 5

@@ -204,45 +204,10 @@ public class Fighter : MonoBehaviour
         defenseModifier = 0;
         for (int i = 0; i < effects.Count; i++)
         {
-            
-            // 효과 발동
-            switch (effects[i]._EffectType)
-            {
-                case Effect.EffectType.Poison:
-                    Hp -= (effects[i].LeftTurn / 3) + 1;
-                    UIManager.instance.AddMessage($"{name}은(는) 독에 의해 {(effects[i].LeftTurn / 3) + 1}대미지를 입었다.", "#ff8000"); // 주황
-                    break;
-                case Effect.EffectType.Burn:
-                    int damage = Random.Range(1, (effects[i].LeftTurn / 2) + 1);
-                    Hp -= damage;
-                    UIManager.instance.AddMessage($"{name}은(는) 불에 의해 {damage}대미지를 입었다.", "#ff8000"); // 주황
-                    break;
-                case Effect.EffectType.Paralysis:
-                    break;
-                case Effect.EffectType.Regeneration:
-                    Hp += (effects[i].LeftTurn / 2) + 1;
-                    break;
-                case Effect.EffectType.Rage:
-                    attackModifier += 0.4f;
-                    break;
-                case Effect.EffectType.Protection:
-                    defenseModifier += 0.4f;
-                    break;
-                case Effect.EffectType.MagicalVision:
-                    this.GetComponent<Actor>().FieldOfViewRange = 20;
-                    break;
-                case Effect.EffectType.Weakness:
-                    attackModifier -= 0.4f;
-                    break;
-                case Effect.EffectType.Vulnerability:
-                    defenseModifier -= 0.4f;
-                    break;
-
-            }
             // 턴 수를 하나 낮춤
             effects[i].LeftTurn -= 1;
             // 만약 지속시간이 끝난 경우 제거
-            if (effects[i].LeftTurn <= 0)
+            if (effects[i].LeftTurn < 0)
             {
                 UIManager.instance.AddMessage($"{name}의 {effects[i].EffectName()} 효과가 끝났다.", "#FFFF00"); // 노랑
                 switch (effects[i]._EffectType)
@@ -274,7 +239,43 @@ public class Fighter : MonoBehaviour
                 }
                 effects.Remove(effects[i]);
             }
+            else
+            {
+                // 효과 발동
+                switch (effects[i]._EffectType)
+                {
+                    case Effect.EffectType.Poison:
+                        Hp -= (effects[i].LeftTurn / 3) + 1;
+                        UIManager.instance.AddMessage($"{name}은(는) 독에 의해 {(effects[i].LeftTurn / 3) + 1}대미지를 입었다.", "#ff8000"); // 주황
+                        break;
+                    case Effect.EffectType.Burn:
+                        int damage = Random.Range(1, (effects[i].LeftTurn / 2) + 1);
+                        Hp -= damage;
+                        UIManager.instance.AddMessage($"{name}은(는) 불에 의해 {damage}대미지를 입었다.", "#ff8000"); // 주황
+                        break;
+                    case Effect.EffectType.Paralysis:
+                        break;
+                    case Effect.EffectType.Regeneration:
+                        Hp += (effects[i].LeftTurn / 2) + 1;
+                        break;
+                    case Effect.EffectType.Rage:
+                        attackModifier += 0.4f;
+                        break;
+                    case Effect.EffectType.Protection:
+                        defenseModifier += 0.4f;
+                        break;
+                    case Effect.EffectType.MagicalVision:
+                        this.GetComponent<Actor>().FieldOfViewRange = 20;
+                        break;
+                    case Effect.EffectType.Weakness:
+                        attackModifier -= 0.4f;
+                        break;
+                    case Effect.EffectType.Vulnerability:
+                        defenseModifier -= 0.4f;
+                        break;
 
+                }
+            }
         }
     }
 
