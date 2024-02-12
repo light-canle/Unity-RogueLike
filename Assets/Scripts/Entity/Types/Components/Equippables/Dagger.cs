@@ -1,9 +1,10 @@
 sealed class Dagger : Equippable
 {
-    public Dagger()
+    public Dagger(int reinforce = 0)
     {
         EquipmentType = EquipmentType.Weapon;
         PowerBonus = 2;
+        Reinforcement = reinforce;
     }
 
     private void OnValidate()

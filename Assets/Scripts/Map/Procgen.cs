@@ -33,12 +33,12 @@ sealed class Procgen : MonoBehaviour
         // 6 ~ 10층 무기, 방어구
         new Tuple<int, string, int>(9, "레이피어", 4), new Tuple<int, string, int>(9, "사슬 갑옷", 10), new Tuple<int, string, int>(9, "신속의 갑옷", 10),
         new Tuple<int, string, int>(9, "장검", 4), new Tuple<int, string, int>(9, "메이스", 4),
-        // 11 ~ 18층 무기, 방어구
+        // 11 ~ 17층 무기, 방어구
         new Tuple<int, string, int>(14, "룬소드", 4), new Tuple<int, string, int>(14, "미늘 갑옷", 8), new Tuple<int, string, int>(14, "미스릴 갑옷", 8),
         new Tuple<int, string, int>(14, "전투도끼", 4), new Tuple<int, string, int>(14, "시미터", 4),
-        // 19 ~ 층 무기, 방어구
-        new Tuple<int, string, int>(19, "할버드", 2), new Tuple<int, string, int>(19, "판금 갑옷", 4), new Tuple<int, string, int>(19, "미스릴 판금 갑옷", 4),
-        new Tuple<int, string, int>(19, "초대형 낫", 2),
+        // 18 ~ 층 무기, 방어구
+        new Tuple<int, string, int>(18, "할버드", 2), new Tuple<int, string, int>(18, "판금 갑옷", 4), new Tuple<int, string, int>(18, "미스릴 판금 갑옷", 4),
+        new Tuple<int, string, int>(18, "초대형 낫", 2),
         // 반지
         new Tuple<int, string, int>(6, "회피의 반지", 3), new Tuple<int, string, int>(6, "집중의 반지", 3),
         // 주문서 
@@ -101,8 +101,16 @@ sealed class Procgen : MonoBehaviour
         {
             if (floor >= chance.Item1)
             {
-                entities.Add(chance.Item2);
-                weightedChances.Add(chance.Item3);
+                // 이미 존재하는 경우 나중 것의 weightedChance로 교체
+                if (entities.Contains(chance.Item2))
+                {
+                    weightedChances[entities.IndexOf(chance.Item2)] = chance.Item3;
+                }
+                else
+                {
+                    entities.Add(chance.Item2);
+                    weightedChances.Add(chance.Item3);
+                }
             }
         }
 

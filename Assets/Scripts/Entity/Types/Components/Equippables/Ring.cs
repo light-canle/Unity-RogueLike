@@ -1,8 +1,9 @@
 sealed class Ring : Equippable
 {
-    public Ring()
+    public Ring(int reinforce = 0)
     {
         EquipmentType = EquipmentType.Ring;
+        Reinforcement = reinforce;
     }
 
     private void OnValidate()

@@ -1,9 +1,10 @@
 sealed class Sword : Equippable
 {
-    public Sword()
+    public Sword(int reinforce = 0)
     {
         EquipmentType = EquipmentType.Weapon;
         PowerBonus = 4;
+        Reinforcement = reinforce;
     }
 
     private void OnValidate()

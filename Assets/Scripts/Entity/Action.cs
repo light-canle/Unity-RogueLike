@@ -49,6 +49,7 @@ public static class Action
 
         if (SaveManager.instance.CurrentFloor == 1 && tileName == MapManager.instance.UpStairsTile.name)
         {
+            // TODO : 옌더의 아뮬렛을 들고 있는 경우 게임을 클리어 함
             UIManager.instance.AddMessage("신비로운 힘이 당신이 돌아가려는 것을 막는다.", "#0da2ff");
             return;
         }
