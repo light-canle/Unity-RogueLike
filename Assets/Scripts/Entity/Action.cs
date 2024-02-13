@@ -123,6 +123,7 @@ public static class Action
 
         item.Equippable.Reinforcement += 1;
         UIManager.instance.ToggleSelectMenu(consumer);
+        UIManager.instance.AddMessage($"{item.name}에서 빛이 나면서 강한 마법의 기운이 들어왔다.", "#8080ff");
         GameManager.instance.EndTurn();
     }
     /// <summary>

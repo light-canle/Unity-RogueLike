@@ -44,14 +44,14 @@ sealed class Procgen : MonoBehaviour
         new Tuple<int, string, int>(6, "회피의 반지", 3), new Tuple<int, string, int>(6, "집중의 반지", 3),
         new Tuple<int, string, int>(8, "화염 저항의 반지", 3), new Tuple<int, string, int>(8, "독 저항의 반지", 3),
         // 주문서 
-        new Tuple<int, string, int>(2, "강화의 주문서", 1),
+        new Tuple<int, string, int>(2, "강화의 주문서", 3),
         new Tuple<int, string, int>(5, "혼란의 주문서", 20),
         new Tuple<int, string, int>(6, "번개의 주문서", 25), 
         new Tuple<int, string, int>(11, "빙결의 주문서", 20), 
         new Tuple<int, string, int>(12, "화염구의 주문서", 25),
         // 투척용 무기
         new Tuple<int, string, int>(0, "투척용 돌", 15),
-        new Tuple<int, string, int>(0, "투척용 독 포션", 100),
+        new Tuple<int, string, int>(8, "투척용 독 포션", 10),
     };
     // (층 수, 몹 이름, 가중치)
     // 같은 몹 이름이 여러 개 있는 경우 해당 층에서 가장 높은 층 수를 가진 데이터만을 취한다.

@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject levelUpMenuContent;
 
     public bool IsMenuOpen { get => isMenuOpen; }
+    public bool IsSelectMenuOpen { get => isSelectMenuOpen; }
     public bool IsMessageHistoryOpen { get => isMessageHistoryOpen; }
     public bool IsInventoryOpen { get => isInventoryOpen; }
     public bool IsDropMenuOpen { get => isDropMenuOpen; }
@@ -151,7 +152,6 @@ public class UIManager : MonoBehaviour
                     ToggleCharacterInformationMenu();
                     break;
                 case bool _ when isSelectMenuOpen:
-                    isMenuOpen = true;
                     ToggleSelectMenu();
                     break;
                 default:
@@ -198,7 +198,7 @@ public class UIManager : MonoBehaviour
         isSelectMenuOpen = !isSelectMenuOpen;
         SetBooleans(selectMenu, isSelectMenuOpen);
 
-        if (isMenuOpen)
+        if (isSelectMenuOpen)
         {
             UpdateMenu(actor, selectMenuContent);
         }
@@ -275,6 +275,10 @@ public class UIManager : MonoBehaviour
                 $"명중 : {actor.GetComponent<Fighter>().Accuracy()}";
             characterInformationMenu.transform.GetChild(6).GetComponent<TextMeshProUGUI>().text =
                 $"회피 : {actor.GetComponent<Fighter>().Evasion()}";
+            characterInformationMenu.transform.GetChild(7).GetComponent<TextMeshProUGUI>().text =
+                $"화염 저항 : {actor.GetComponent<Fighter>().FireResistance() * 100:F1}%";
+            characterInformationMenu.transform.GetChild(8).GetComponent<TextMeshProUGUI>().text =
+                $"독 저항 : {actor.GetComponent<Fighter>().PoisonResistance() * 100:F1}%";
         }
     }
 

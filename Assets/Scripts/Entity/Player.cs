@@ -255,7 +255,7 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
     private void FixedUpdate()
     {
         // 메뉴 창이 떠있으면 움직이지 않음
-        if (!UIManager.instance.IsMenuOpen && !targetMode)
+        if (!UIManager.instance.IsMenuOpen && !targetMode && !UIManager.instance.IsSelectMenuOpen)
         {
             if (GameManager.instance.IsPlayerTurn && moveKeyDown && GetComponent<Actor>().IsAlive)
                 Move();
@@ -294,7 +294,8 @@ public class Player : MonoBehaviour, Controls.IPlayerActions
 
     private bool CanAct()
     {
-        if (targetMode || UIManager.instance.IsMenuOpen || !GetComponent<Actor>().IsAlive)
+        if (targetMode || UIManager.instance.IsMenuOpen || 
+            UIManager.instance.IsSelectMenuOpen || !GetComponent<Actor>().IsAlive)
         {
             return false;
         }

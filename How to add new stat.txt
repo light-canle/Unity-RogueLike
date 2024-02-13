@@ -59,3 +59,7 @@ baseFireResistance = state.BaseFireResistance;
         }
         return bonus;
     }
+
+4. 플레이어 스탯 창에 해당 스탯이 표시되도록 하기 위해 UIManager.cs에 있는 ToggleCharacterInformationMenu() 함수에 내용을 추가한다.
+
+5. Dungeon Scene에 있는 Canvas에서 Character Information에 새로운 자식을 추가한다.(기존 것을 복사하는 것이 좋다.)

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 2102232827
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 12850d7adeeec5b4b9334336fef82e38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b1d1f84d98c5ca48ad78e1c7d494f06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentType: 2
+  ringBonusType: 6
+  enchantType: 0
   powerBonus: 0
   defenseBonus: 0
   evasionBonus: 0
