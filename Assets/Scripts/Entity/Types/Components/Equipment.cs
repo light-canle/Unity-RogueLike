@@ -12,6 +12,7 @@ public class Equipment : MonoBehaviour
     public Equippable Armor { get => armor; set => armor = value; }
     public Equippable Ring { get => ring; set => ring = value; }
 
+    // 속성 보너스
     public int DefenseBonus()
     {
         int bonus = 0;
@@ -107,6 +108,56 @@ public class Equipment : MonoBehaviour
             }
 
             bonus += ring.AccuracyBonus;
+        }
+        return bonus;
+    }
+
+    public float FireResistanceBonus()
+    {
+        float bonus = 0;
+
+        if (weapon is not null && weapon.FireResistanceBonus > 0)
+        {
+            bonus += weapon.FireResistanceBonus;
+        }
+
+        if (armor is not null && armor.FireResistanceBonus > 0)
+        {
+            bonus += armor.FireResistanceBonus;
+        }
+
+        if (ring is not null && ring.FireResistanceBonus > 0)
+        {
+            if (ring.RingBonusType == RingBonusType.FireResistance){
+                bonus += ring.Reinforcement * 0.25f;
+            }
+
+            bonus += ring.FireResistanceBonus;
+        }
+        return bonus;
+    }
+    
+    public float PoisonResistanceBonus()
+    {
+        float bonus = 0;
+
+        if (weapon is not null && weapon.PoisonResistanceBonus > 0)
+        {
+            bonus += weapon.PoisonResistanceBonus;
+        }
+
+        if (armor is not null && armor.PoisonResistanceBonus > 0)
+        {
+            bonus += armor.PoisonResistanceBonus;
+        }
+
+        if (ring is not null && ring.PoisonResistanceBonus > 0)
+        {
+            if (ring.RingBonusType == RingBonusType.PoisonResistance){
+                bonus += ring.Reinforcement * 0.25f;
+            }
+
+            bonus += ring.PoisonResistanceBonus;
         }
         return bonus;
     }

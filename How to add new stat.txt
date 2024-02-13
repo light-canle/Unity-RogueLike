@@ -1,0 +1,61 @@
+새로운 스탯을 추가하는 방법
+
+1. Fighter.cs에서 새로운 스탯을 추가한다.
+- baseXXX의 형태로 추가
+- XXX를 바꾸는 프로퍼티 추가 (get. set)
+- XXX()이름의 스탯값을 반환하는 함수 추가.
+
+public int XXX()
+{
+    return baseXXX + XXXBonus();
+}
+
+- XXXBonus() 함수 추가 - 이 함수에서는 장비에서 해당 스탯의 보너스 값을 계산
+
+public int XXXBonus()
+{
+    if (GetComponent<Equipment>() is not null)
+    {
+        return GetComponent<Equipment>().XXXBonus();
+     }
+
+    return 0;
+}
+
+- 같은 파일에 있는 FighterState 클래스에 해당 스탯을 추가한다. - 변수, 프로퍼티, 생성자에서 초기화 모두 해주기
+- LoadState()와 SaveState()에 해당 스탯을 추가한다.
+
+SaveState()에서
+baseFireResistance : baseFireResistance,
+
+LoadState()에서
+baseFireResistance = state.BaseFireResistance;
+
+2. Equippable.cs에 들어가서 해당 스탯을 추가한다. 변수는 XXXBonus를 추가하고 프로퍼티도 추가하면 된다. 만약 반지에도 해당 속성을 넣고 싶다면 해당 이름의 변수를 enum RingBonusType에 추가한다.
+
+3. GetComponent<Equipment>().XXXBonus()를 구현하기 위해 Equipment.cs에 들어가서 XXXBonus() 함수를 추가한다.
+
+    public float FireResistanceBonus()
+    {
+        float bonus = 0;
+
+        if (weapon is not null && weapon.FireResistanceBonus > 0)
+        {
+            bonus += weapon.FireResistanceBonus;
+        }
+
+        if (armor is not null && armor.FireResistanceBonus > 0)
+        {
+            bonus += armor.FireResistanceBonus;
+        }
+
+        if (ring is not null && ring.FireResistanceBonus > 0)
+        {
+            if (ring.RingBonusType == RingBonusType.FireResistance){
+                bonus += ring.Reinforcement * 0.25f;
+            }
+
+            bonus += ring.FireResistanceBonus;
+        }
+        return bonus;
+    }

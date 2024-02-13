@@ -10,6 +10,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] private Actor target; // 공격할 대상
     [SerializeField] private List<Effect> effects = new List<Effect>();
     [SerializeField] private float defenseModifier = 0.0f, attackModifier = 0.0f;
+    [SerializeField] private float baseFireResistance, basePoisonResistance; // 저항
 
     public int Hp
     {
@@ -47,6 +48,17 @@ public class Fighter : MonoBehaviour
     public float AttackModifier { get => attackModifier; set => attackModifier = value; }
     public float DefenseModifier { get => defenseModifier; set => defenseModifier = value; }
     public List<Effect> Effects { get => effects; set => effects = value; }
+    public float BaseFireResistance
+    {
+        get => baseFireResistance;
+        set => baseFireResistance = value;
+    }
+
+    public float BasePoisonResistance
+    {
+        get => basePoisonResistance;
+        set => basePoisonResistance = value;
+    }
 
     // 속성 값을 반환
     public int Power()
@@ -69,6 +81,16 @@ public class Fighter : MonoBehaviour
         return baseAccuracy + AccuracyBonus();
     }
 
+    public float FireResistance()
+    {
+        return baseFireResistance + FireResistanceBonus();
+    }
+
+    public float PoisonResistance()
+    {
+        return basePoisonResistance + PoisonResistanceBonus();
+    }
+    // 장비에서 능력치를 가져옴
     public int PowerBonus()
     {
         if (GetComponent<Equipment>() is not null)
@@ -102,6 +124,24 @@ public class Fighter : MonoBehaviour
         if (GetComponent<Equipment>() is not null)
         {
             return GetComponent<Equipment>().AccuracyBonus();
+        }
+        return 0;
+    }
+
+    public float FireResistanceBonus()
+    {
+        if (GetComponent<Equipment>() is not null)
+        {
+            return GetComponent<Equipment>().FireResistanceBonus();
+        }
+        return 0;
+    }
+
+    public float PoisonResistanceBonus()
+    {
+        if (GetComponent<Equipment>() is not null)
+        {
+            return GetComponent<Equipment>().PoisonResistanceBonus();
         }
         return 0;
     }
@@ -241,15 +281,17 @@ public class Fighter : MonoBehaviour
             }
             else
             {
+                int damage;
                 // 효과 발동
                 switch (effects[i]._EffectType)
                 {
                     case Effect.EffectType.Poison:
-                        Hp -= (effects[i].LeftTurn / 3) + 1;
-                        UIManager.instance.AddMessage($"{name}은(는) 독에 의해 {(effects[i].LeftTurn / 3) + 1}대미지를 입었다.", "#ff8000"); // 주황
+                        damage = Mathf.CeilToInt(((effects[i].LeftTurn / 3) + 1) * (1.0f - PoisonResistance()));
+                        Hp -= damage;
+                        UIManager.instance.AddMessage($"{name}은(는) 독에 의해 {damage}대미지를 입었다.", "#ff8000"); // 주황
                         break;
                     case Effect.EffectType.Burn:
-                        int damage = Random.Range(1, (effects[i].LeftTurn / 2) + 1);
+                        damage = Mathf.CeilToInt(Random.Range(1, (effects[i].LeftTurn / 2) + 1) * (1.0f - FireResistance()));
                         Hp -= damage;
                         UIManager.instance.AddMessage($"{name}은(는) 불에 의해 {damage}대미지를 입었다.", "#ff8000"); // 주황
                         break;
@@ -289,7 +331,9 @@ public class Fighter : MonoBehaviour
         baseEvasion :baseEvasion,
         attackModifier : attackModifier,
         defenseModifier : defenseModifier,
-        effects : effects
+        effects : effects,
+        baseFireResistance : baseFireResistance,
+        basePoisonResistance: basePoisonResistance
     );
 
     public void LoadState(FighterState state)
@@ -304,6 +348,8 @@ public class Fighter : MonoBehaviour
         attackModifier = state.AttackModifier;
         defenseModifier = state.DefenseModifier;
         effects = state.Effects;
+        baseFireResistance = state.BaseFireResistance;
+        basePoisonResistance = state.BasePoisonResistance;
     }
 }
 
@@ -313,6 +359,7 @@ public class FighterState{
     [SerializeField] private string target;
     [SerializeField] private List<Effect> effects = new List<Effect>();
     [SerializeField] private float defenseModifier = 0.0f, attackModifier = 0.0f;
+    [SerializeField] private float baseFireResistance = 0.0f, basePoisonResistance = 0.0f;
 
     public int MaxHp { get => maxHp; set => maxHp = value; }
     public int Hp { get => hp; set => hp = value; }
@@ -324,9 +371,22 @@ public class FighterState{
     public float DefenseModifier { get => defenseModifier; set => defenseModifier = value; }
     public string Target { get => target; set => target = value; }
     public List<Effect> Effects { get => effects; set => effects = value; }
+    
+    public float BaseFireResistance
+    {
+        get => baseFireResistance;
+        set => baseFireResistance = value;
+    }
+
+    public float BasePoisonResistance
+    {
+        get => basePoisonResistance;
+        set => basePoisonResistance = value;
+    }
 
     public FighterState(int maxHp, int hp, int baseDefense, int basePower, string target,
-        int baseAccuracy, int baseEvasion, float attackModifier, float defenseModifier, List<Effect> effects) 
+        int baseAccuracy, int baseEvasion, float attackModifier, float defenseModifier, List<Effect> effects,
+        float baseFireResistance, float basePoisonResistance) 
     { 
         this.maxHp = maxHp;
         this.hp = hp;
@@ -338,5 +398,7 @@ public class FighterState{
         this.attackModifier = attackModifier;
         this.defenseModifier = defenseModifier;
         this.effects = effects;
+        this.baseFireResistance = baseFireResistance;
+        this.basePoisonResistance = basePoisonResistance;
     }
 }

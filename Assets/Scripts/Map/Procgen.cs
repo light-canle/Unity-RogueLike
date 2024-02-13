@@ -42,6 +42,7 @@ sealed class Procgen : MonoBehaviour
         new Tuple<int, string, int>(18, "초대형 낫", 2),
         // 반지
         new Tuple<int, string, int>(6, "회피의 반지", 3), new Tuple<int, string, int>(6, "집중의 반지", 3),
+        new Tuple<int, string, int>(8, "화염 저항의 반지", 3), new Tuple<int, string, int>(8, "독 저항의 반지", 3),
         // 주문서 
         new Tuple<int, string, int>(2, "강화의 주문서", 1),
         new Tuple<int, string, int>(5, "혼란의 주문서", 20),

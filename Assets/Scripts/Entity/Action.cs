@@ -213,36 +213,38 @@ public static class Action
         }
         // 5. 효과 부여
         // 플레이어 무기 인챈트
-        
+
+        float fireResist = Mathf.Min(target.GetComponent<Fighter>().FireResistance(), 1.0f);
+        float poisonResist = Mathf.Min(target.GetComponent<Fighter>().PoisonResistance(), 1.0f);
         // 몬스터
-        if (actor.name == "독사" && Random.Range(0.0f, 1.0f) > 0.8f)
+        if (actor.name == "독사" && Random.Range(0.0f, 1.0f) < 0.2f * (1.0f - (poisonResist)))
         {
             target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Poison, Random.Range(3,7));
         }
-        else if (actor.name == "벌" && Random.Range(0.0f, 1.0f) > 0.75f)
+        else if (actor.name == "벌" && Random.Range(0.0f, 1.0f) < 0.25f * (1.0f - (poisonResist)))
         {
             target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Poison, Random.Range(2,6));
         }
-        else if (actor.name == "오우거 마법사" && Random.Range(0.0f, 1.0f) > 0.75f)
+        else if (actor.name == "오우거 마법사" && Random.Range(0.0f, 1.0f) < 0.25f)
         {
             if (Random.Range(0.0f, 1.0f) > 0.6f)
             {
                 target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Weakness, 20);
             }
-            else
+            else if (Random.Range(0.0f, 1.0f) > fireResist)
             {
                 target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Burn, Random.Range(4, 8));
             }
         }
-        else if (actor.name == "스켈레톤 전사" && Random.Range(0.0f, 1.0f) > 0.8f)
+        else if (actor.name == "스켈레톤 전사" && Random.Range(0.0f, 1.0f) < 0.2f)
         {
             target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Vulnerability, 20);
         }
-        else if (actor.name == "화염 슬라임" && Random.Range(0.0f, 1.0f) > 0.7f)
+        else if (actor.name == "화염 슬라임" && Random.Range(0.0f, 1.0f) < 0.3f * (1 - (fireResist)))
         {
             target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Burn, Random.Range(3, 6));
         }
-        else if (actor.name == "화염 박쥐" && Random.Range(0.0f, 1.0f) > 0.7f)
+        else if (actor.name == "화염 박쥐" && Random.Range(0.0f, 1.0f) < 0.3f * (1 - (fireResist)))
         {
             target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Burn, Random.Range(3, 6));
         }
