@@ -23,7 +23,7 @@ public class ThrowingPotion : Consumable
     public override bool Cast(Actor consumer, Actor target)
     {
         UIManager.instance.AddMessage($"{consumer.name}(이)가 {target.name}에게 포션을 던졌다!", "#ffff00");
-        target.GetComponent<Fighter>().AddEffect(effectType, effectTurns);
+        Action.ApplyEffect(consumer, target, effectType, effectTurns); 
         Consume(consumer);
         consumer.GetComponent<Player>().ToggleTargetMode();
         return true;

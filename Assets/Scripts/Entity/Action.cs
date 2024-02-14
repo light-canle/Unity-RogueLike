@@ -214,40 +214,38 @@ public static class Action
         }
         // 5. 효과 부여
         // 플레이어 무기 인챈트
-
-        float fireResist = Mathf.Min(target.GetComponent<Fighter>().FireResistance(), 1.0f);
-        float poisonResist = Mathf.Min(target.GetComponent<Fighter>().PoisonResistance(), 1.0f);
+        
         // 몬스터
-        if (actor.name == "독사" && Random.Range(0.0f, 1.0f) < 0.2f * (1.0f - (poisonResist)))
+        if (actor.name == "독사" && Random.Range(0.0f, 1.0f) < 0.2f)
         {
-            target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Poison, Random.Range(3,7));
+            ApplyEffect(actor, target, Effect.EffectType.Poison, Random.Range(3,7));
         }
-        else if (actor.name == "벌" && Random.Range(0.0f, 1.0f) < 0.25f * (1.0f - (poisonResist)))
+        else if (actor.name == "벌" && Random.Range(0.0f, 1.0f) < 0.25f)
         {
-            target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Poison, Random.Range(2,6));
+            ApplyEffect(actor, target, Effect.EffectType.Poison, Random.Range(2,6));
         }
         else if (actor.name == "오우거 마법사" && Random.Range(0.0f, 1.0f) < 0.25f)
         {
             if (Random.Range(0.0f, 1.0f) > 0.6f)
             {
-                target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Weakness, 20);
+                ApplyEffect(actor, target, Effect.EffectType.Weakness, 20);
             }
-            else if (Random.Range(0.0f, 1.0f) > fireResist)
+            else
             {
-                target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Burn, Random.Range(4, 8));
+                ApplyEffect(actor, target, Effect.EffectType.Burn, Random.Range(4, 8));
             }
         }
         else if (actor.name == "스켈레톤 전사" && Random.Range(0.0f, 1.0f) < 0.2f)
         {
-            target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Vulnerability, 20);
+            ApplyEffect(actor, target, Effect.EffectType.Vulnerability, 20);
         }
-        else if (actor.name == "화염 슬라임" && Random.Range(0.0f, 1.0f) < 0.3f * (1 - (fireResist)))
+        else if (actor.name == "화염 슬라임" && Random.Range(0.0f, 1.0f) < 0.3f)
         {
-            target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Burn, Random.Range(3, 6));
+            ApplyEffect(actor, target, Effect.EffectType.Burn, Random.Range(3, 6));
         }
-        else if (actor.name == "화염 박쥐" && Random.Range(0.0f, 1.0f) < 0.3f * (1 - (fireResist)))
+        else if (actor.name == "화염 박쥐" && Random.Range(0.0f, 1.0f) < 0.3f)
         {
-            target.GetComponent<Fighter>().AddEffect(Effect.EffectType.Burn, Random.Range(3, 6));
+            ApplyEffect(actor, target, Effect.EffectType.Burn, Random.Range(3, 6));
         }
         GameManager.instance.EndTurn();
     }
@@ -391,5 +389,33 @@ public static class Action
 
         UIManager.instance.ToggleInventory();
         GameManager.instance.EndTurn();
+    }
+
+    /// <summary>
+    /// target에게 특정 효과를 부여한다.
+    /// </summary>
+    /// <param name="consumer"></param>
+    /// <param name="target"></param>
+    /// <param name="effect"></param>
+    public static void ApplyEffect(Actor consumer, Actor target, Effect.EffectType type, int turns)
+    {
+        switch (type)
+        {
+            case Effect.EffectType.Burn:
+                if (Random.Range(0.0f, 1.0f) < target.GetComponent<Fighter>().FireResistance())
+                {
+                    UIManager.instance.AddMessage($"{target.name}은(는) 화상 효과에 저항했다!", "#ffff80");
+                    return;
+                }
+                break;
+            case Effect.EffectType.Poison:
+                if (Random.Range(0.0f, 1.0f) < target.GetComponent<Fighter>().PoisonResistance())
+                {
+                    UIManager.instance.AddMessage($"{target.name}은(는) 독 효과에 저항했다!", "#ffff80");
+                    return;
+                }
+                break;
+        }
+        target.GetComponent<Fighter>().AddEffect(type, turns);
     }
 }
