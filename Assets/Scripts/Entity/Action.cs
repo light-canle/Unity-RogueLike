@@ -49,7 +49,21 @@ public static class Action
 
         if (SaveManager.instance.CurrentFloor == 1 && tileName == MapManager.instance.UpStairsTile.name)
         {
-            // TODO : 옌더의 아뮬렛을 들고 있는 경우 게임을 클리어 함
+            // TODO : 빛의 반지를 들고 있는 경우 게임을 클리어 함
+            if (actor.TryGetComponent<Inventory>(out Inventory inventory))
+            {
+                if (inventory.IsContain("빛의 반지"))
+                {
+                    MapManager.instance = null;
+                    GameManager.instance = null;
+                    // 세이브 파일 삭제
+                    SaveManager.instance.DeleteSave();
+                    SceneManager.LoadScene(2);
+                    return;
+                }
+                
+            }
+
             UIManager.instance.AddMessage("신비로운 힘이 당신이 돌아가려는 것을 막는다.", "#0da2ff");
             return;
         }
@@ -64,7 +78,7 @@ public static class Action
         else
         {
             GameManager.instance.Reset(false);
-            MapManager.instance.GenerateDungeon();
+            MapManager.instance.GenerateDungeon(false, SaveManager.instance.CurrentFloor == 26);
         }
 
         if (tileName == MapManager.instance.UpStairsTile.name)

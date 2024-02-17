@@ -132,6 +132,8 @@ MonoBehaviour:
   target: {fileID: 0}
   defenseModifier: 0
   attackModifier: 0
+  baseFireResistance: 0
+  basePoisonResistance: 1
 --- !u!114 &-8707153400226282861
 MonoBehaviour:
   m_ObjectHideFlags: 0

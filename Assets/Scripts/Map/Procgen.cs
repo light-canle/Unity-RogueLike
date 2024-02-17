@@ -136,7 +136,9 @@ sealed class Procgen : MonoBehaviour
     /// <param name="maxRooms">방의 최대 개수</param>
     /// <param name="rooms">방들을 담은 리스트</param>
     /// <param name="isNewGame">새로운 게임인지 여부</param>
-    public void GenerateDungeon(int mapWidth, int mapHeight, int roomMaxSize, int roomMinSize, int maxRooms, List<RectangularRoom> rooms, bool isNewGame)
+    /// <param name="isNewGame">마지막 층인지 여부</param>
+    public void GenerateDungeon(int mapWidth, int mapHeight, int roomMaxSize, int roomMinSize,
+        int maxRooms, List<RectangularRoom> rooms, bool isNewGame, bool isLastFloor = false)
     {
         for (int roomNum = 0; roomNum < maxRooms; roomNum++)
         {
@@ -180,17 +182,26 @@ sealed class Procgen : MonoBehaviour
             {
                 // 이 방과 전 방 사이를 통로로 연결한다.
                 TunnelBetween(rooms[rooms.Count - 1], newRoom);
-                // 첫 방에는 엔티티를 놓지 않는다.
-                PlaceEntities(newRoom, SaveManager.instance.CurrentFloor);
+                // 첫 방에는 엔티티를 놓지 않는다. 그리고 마지막 층에는 모든 방에 엔티티를 추가로 놓지 않는다.
+                if (!isLastFloor)
+                    PlaceEntities(newRoom, SaveManager.instance.CurrentFloor);
             }
 
             
             // 방을 리스트에 추가
             rooms.Add(newRoom);
         }
-        // 마지막 방에 계단을 위치시킨다.
-        MapManager.instance.FloorMap.SetTile((Vector3Int)rooms[rooms.Count - 1].RandomPoint(), MapManager.instance.DownStairsTile);
-
+        
+        // 마지막 층이 아닌 경우 마지막 방에 계단을 위치시킨다.
+        if (!isLastFloor)
+            MapManager.instance.FloorMap.SetTile((Vector3Int)rooms[rooms.Count - 1].RandomPoint(), MapManager.instance.DownStairsTile);
+        // 마지막 층에는 빛의 반지를 위치시킨다.
+        else
+        {
+            Vector3Int entityPos = (Vector3Int)rooms[rooms.Count - 1].RandomPoint();
+            MapManager.instance.CreateEntity("빛의 반지", (Vector2Int)entityPos);
+        }
+        
         // 첫번째 방에 플레이어와 위로 가는 계단을 위치시킨다.
         Vector3Int playerPos = (Vector3Int)rooms[0].RandomPoint();
 

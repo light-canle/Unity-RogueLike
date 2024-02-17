@@ -52,6 +52,9 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("!");
+        Debug.Log(instance);
+        Debug.Log(this);
         if (instance == null) { 
             instance = this;
         }
@@ -63,6 +66,9 @@ public class MapManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name != "Dungeon")
+            return;
+
         SceneState sceneState = SaveManager.instance.Save.Scenes.Find(x => x.FloorNumber == SaveManager.instance.CurrentFloor);
 
         if (sceneState is not null)
@@ -82,7 +88,7 @@ public class MapManager : MonoBehaviour
         Camera.main.orthographicSize = 27;
     }
 
-    public void GenerateDungeon(bool isNewGame = false)
+    public void GenerateDungeon(bool isNewGame = false, bool isLastFloor = false)
     {
         //Debug.Log(floorMap.cellBounds.size.x);
         if (floorMap.cellBounds.size.x > 0)
@@ -98,7 +104,7 @@ public class MapManager : MonoBehaviour
        
 
         Procgen procGen = new Procgen();
-        procGen.GenerateDungeon(width, height, roomMaxSize, roomMinSize, maxRooms, rooms, isNewGame);
+        procGen.GenerateDungeon(width, height, roomMaxSize, roomMinSize, maxRooms, rooms, isNewGame, isLastFloor);
         //Vector3Int wallPosition = new Vector3Int(wallBounds.min.x + x, wallBounds.min.y + y, 0);
         //obstacleMap.SetTile(wallPosition, wallTile);
         AddTileMapToDictionary(floorMap);

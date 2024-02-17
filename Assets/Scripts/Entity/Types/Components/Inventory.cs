@@ -30,4 +30,17 @@ public class Inventory : MonoBehaviour
         item.AddToGameManager();
         UIManager.instance.AddMessage($"당신은 {item.name}을(를) 떨어뜨렸다.", "#ff0000");
     }
+
+    public bool IsContain(string itemName)
+    {
+        foreach (Item item in Items)
+        {
+            if (item.name == itemName)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

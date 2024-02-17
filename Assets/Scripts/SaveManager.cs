@@ -84,6 +84,7 @@ public class SaveManager : MonoBehaviour
     {
         string path = Path.Combine(Application.persistentDataPath, saveFileName);
         File.Delete(path);
+        save = new SaveData();
     }
 
     public void AddScene(SceneState sceneState) => save.Scenes.Add(sceneState);
